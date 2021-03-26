@@ -13,11 +13,17 @@
     <button type="submit">Add</button>
 
 </form>
-
+ <!-- django for loop -->
 {% for place in places %}
 
 <div>
     {{ place.name }}
+        <!--url reversing, looks up url and realizes there's a place holder and fills in with int-->
+    <form method="POST" action="{% url 'place_was_visited' place.pk %}">
+        {% csrf_token %}
+        <button>Visited!</button>
+    </form>
+
 </div>
 
 {% empty %}
@@ -26,6 +32,8 @@
 
 {% endfor %}
 
+<!--link to places visited-->
+<a href="{% url 'places_visited' %}">Places you've visited</a>
 
 <body>
 </body>
