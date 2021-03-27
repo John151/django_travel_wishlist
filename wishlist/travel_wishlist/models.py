@@ -4,6 +4,7 @@ from django.db import models
 
 # used to create table for user input, place name and whether visited already
 
+
 class Place(models.Model):
     name = models.CharField(max_length=200)
     visited = models.BooleanField(default=False)

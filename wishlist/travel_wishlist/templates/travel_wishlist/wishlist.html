@@ -1,25 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+{% extends 'travel_wishlist/base.html' %}
+{% block content %}
 
 <h2>Travel Wishlist</h2>
 
 <form method="POST" action="{% url 'place_list' %}">
     {% csrf_token %}
     {{ new_place_form }}
-    <button type="submit">Add</button>
+    <button id="add-new-place" type="submit">Add</button>
 
 </form>
  <!-- django for loop -->
 {% for place in places %}
 
-<div>
-    {{ place.name }}
+<div class="wishlist-place">
+    <span class="place_name">{{ place.name }}</span>
+
         <!--url reversing, looks up url and realizes there's a place holder and fills in with int-->
-    <form method="POST" action="{% url 'place_was_visited' place.pk %}">
+    <form class="visited-form" method="POST" action="{% url 'place_was_visited' place.pk %}">
         {% csrf_token %}
         <button>Visited!</button>
     </form>
@@ -32,9 +29,4 @@
 
 {% endfor %}
 
-<!--link to places visited-->
-<a href="{% url 'places_visited' %}">Places you've visited</a>
-
-<body>
-</body>
-</html>
+{% endblock %}
