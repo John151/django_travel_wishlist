@@ -13,16 +13,19 @@
 {% for place in places %}
 
 <div class="wishlist-place">
-    <span id="place-name-{{place.pk}} class="place_name">{{ place.name }}</span>
+
+    <span id="place-name-{{place.pk}} class="place_name">
+        <a href="{% url 'place_details' place.pk %}"> {{ place.name }} </a>
+    </span>
 
         <!--url reversing, looks up url and realizes there's a place holder and fills in with int-->
     <form class="visited-form" method="POST" action="{% url 'place_was_visited' place.pk %}">
         {% csrf_token %}
-        <button id="visited-button-{{place.pk}}">Visited!</button>
+        <button id="visited-button-{{place.pk}}" type="submit">Visited!</button>
     </form>
 
 </div>
-
+ 
 {% empty %}
 
 <p>You have no places in your wishlist.</p>
